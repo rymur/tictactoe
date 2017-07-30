@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rymur.tictactoe.MainActivity">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            android:rowCount="3"
+            android:columnCount="3"
+            tools:layout_editor_absoluteY="8dp"
+            tools:layout_editor_absoluteX="8dp">
+
+            <Button
+                android:id="@+id/btn0"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:layout_rowWeight="1"
+                android:text="@string/placeholder"
+                android:textSize="30sp"
+                android:onClick="onBtnClick"/>
+
+            <Button
+                android:id="@+id/btn1"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="fill"
+                android:text="@string/placeholder"
+                android:textSize="30sp"
+                android:onClick="onBtnClick"/>
+
+            <Button
+                android:id="@+id/btn2"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="fill"
+                android:text="@string/placeholder"
+                android:textSize="30sp"
+                android:onClick="onBtnClick"/>
+
+            <Button
+                android:id="@+id/btn3"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="fill"
+                android:text="@string/placeholder"
+                android:textSize="30sp"
+                android:onClick="onBtnClick"/>
+
+            <Button
+                android:id="@+id/btn4"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="fill"
+                android:text="@string/placeholder"
+                android:textSize="30sp"
+                android:onClick="onBtnClick"/>
+
+            <Button
+                android:id="@+id/btn5"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="fill"
+                android:text="@string/placeholder"
+                android:textSize="30sp"
+                android:onClick="onBtnClick"/>
+
+            <Button
+                android:id="@+id/btn6"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="fill"
+                android:text="@string/placeholder"
+                android:textSize="30sp"
+                android:onClick="onBtnClick"/>
+
+            <Button
+                android:id="@+id/btn7"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="fill"
+                android:text="@string/placeholder"
+                android:textSize="30sp"
+                android:onClick="onBtnClick"/>
+
+            <Button
+                android:id="@+id/btn8"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_gravity="fill"
+                android:text="@string/placeholder"
+                android:textSize="30sp"
+                android:onClick="onBtnClick"/>
+
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="30sp"
+                android:text="@string/score" />
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="30sp"
+                android:text="0" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
