@@ -80,7 +80,7 @@ public class Game {
 
         /* Check diagnonals */
         if ((board[0].equals(board[4]) && board[0].equals(board[8]))
-                || (board[2].equals(board[4]) && board[0].equals(board[6]))) {
+                || (board[2].equals(board[4]) && board[2].equals(board[6]))) {
             if (!(board[4].equals("-"))) {
                 return findWinner(4);
             }
