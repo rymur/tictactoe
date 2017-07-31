@@ -18,8 +18,8 @@ public class Game {
     private String board[] = new String[9];
 
     public Game() {
-        for (String cell : board) {
-                cell = "-";
+        for (int i = 0; i < board.length; i++) {
+                board[i] = "-";
         }
     }
 
