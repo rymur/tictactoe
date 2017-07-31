@@ -5,15 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import java.security.InvalidParameterException;
 
-    private Button board[][] = new Button[3][3];
-    private String curPlayer = "O";  // TicTacToe rules specify O always goes first
+public class MainActivity extends AppCompatActivity {
+    Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        game = new Game();
     }
 
     /**
@@ -21,12 +22,46 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void onBtnClick(View view) {
+        String curPlayer = game.getCurPlayer();
         Button button = (Button) view;
+        int btnId = -1;
+
+        switch(button.getId()) {
+            case (R.id.btn0):
+                btnId = 0;
+                break;
+            case (R.id.btn1):
+                btnId = 1;
+                break;
+            case (R.id.btn2):
+                btnId = 2;
+                break;
+            case (R.id.btn3):
+                btnId = 3;
+                break;
+            case (R.id.btn4):
+                btnId = 4;
+                break;
+            case (R.id.btn5):
+                btnId = 5;
+                break;
+            case (R.id.btn6):
+                btnId = 6;
+                break;
+            case (R.id.btn7):
+                btnId = 7;
+                break;
+            case (R.id.btn8):
+                btnId = 8;
+                break;
+            default:
+                throw new InvalidParameterException("Button ID not recognized");
+        }
+
         String btnValue = button.getText().toString();
-        if (btnValue.equals("-")) {
+        if (game.markCell(btnId)) {
             button.setText(curPlayer);
             button.setClickable(false);
-            curPlayer = curPlayer == "O" ? "X" : "O";
         }
     }
 }

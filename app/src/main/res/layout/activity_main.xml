@@ -49,11 +49,11 @@
             <Button
                 android:id="@+id/btn2"
                 android:layout_columnWeight="1"
-                android:layout_rowWeight="1"
                 android:layout_gravity="fill"
+                android:layout_rowWeight="1"
+                android:onClick="onBtnClick"
                 android:text="@string/placeholder"
-                android:textSize="30sp"
-                android:onClick="onBtnClick"/>
+                android:textSize="30sp" />
 
             <Button
                 android:id="@+id/btn3"
