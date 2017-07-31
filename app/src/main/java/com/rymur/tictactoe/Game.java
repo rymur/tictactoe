@@ -17,16 +17,28 @@ public class Game {
     }
     private String curPlayer = "O";
     private String board[] = new String[9];
+    private int oScore;
+    private int xScore;
 
     public Game() {
+        resetGameBoard();
+        oScore = 0;
+        xScore = 0;
+    }
+
+    public void resetGameBoard() {
         for (int i = 0; i < board.length; i++) {
-                board[i] = "-";
+            board[i] = "-";
         }
     }
 
     public String getCurPlayer() {
         return curPlayer;
     }
+
+    public int getOScore() { return oScore; }
+
+    public int getXScore() { return xScore; }
 
     /**
      * Attempts to mark the specified cell for the current player.
@@ -51,10 +63,8 @@ public class Game {
         /* Check rows */
         for (int i = 0; i < board.length; i += 3) {
             if (board[i].equals(board[i + 1]) && board[i].equals(board[i + 2])) {
-                if (board[i].equals("O")) {
-                    return O_WON;
-                } else if (board[i].equals("X")) {
-                    return X_WON;
+                if (!(board[i].equals("-"))) {
+                    return findWinner(i);
                 }
             }
         }
@@ -62,10 +72,8 @@ public class Game {
         /* Check columns */
         for (int i = 0; i < 3; i++) {
             if (board[i].equals(board[i + 3]) && board[i].equals(board[i + 6])) {
-                if (board[i].equals("O")) {
-                    return O_WON;
-                } else if (board[i].equals("X")) {
-                    return X_WON;
+                if (!(board[i].equals("-"))) {
+                    return findWinner(i);
                 }
             }
         }
@@ -73,10 +81,8 @@ public class Game {
         /* Check diagnonals */
         if ((board[0].equals(board[4]) && board[0].equals(board[8]))
                 || (board[2].equals(board[4]) && board[0].equals(board[6]))) {
-            if (board[4].equals("O")) {
-                return O_WON;
-            } else if (board[4].equals("X")) {
-                return X_WON;
+            if (!(board[4].equals("-"))) {
+                return findWinner(4);
             }
         }
 
@@ -88,5 +94,25 @@ public class Game {
         }
 
         return DRAW;
+    }
+
+    /**
+     * Determines the winner from a given index and increases the score for the winner by 1.
+     * @param index - The index of the array where the winner's character is located.
+     * @return GameState
+     */
+    private GameState findWinner(int index) {
+        if (board[index].equals("O")) {
+            oScore++;
+            return O_WON;
+        } else if (board[index].equals("X")) {
+            xScore++;
+            return X_WON;
+        } else {
+            /* TODO: consider throwing exception or having this method control determination of all
+            finished states
+             */
+            return UNFINISHED;
+        }
     }
 }

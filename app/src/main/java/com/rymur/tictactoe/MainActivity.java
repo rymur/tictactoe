@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.security.InvalidParameterException;
@@ -81,16 +82,23 @@ public class MainActivity extends AppCompatActivity {
             case DRAW:
                 // Pop up a dialog informing user of draw
                 Toast.makeText(getApplicationContext(), "GAME DRAW", Toast.LENGTH_LONG).show();
+                resetBoard();
                 break;
             case O_WON:
                 // Increase O score
+                TextView tvOScore = (TextView) findViewById(R.id.oScore);
+                tvOScore.setText(Integer.toString(game.getOScore()));
                 // Pop up dialog for new game
                 Toast.makeText(getApplicationContext(), "PLAYER O WINS", Toast.LENGTH_LONG).show();
+                resetBoard();
                 break;
             case X_WON:
                 // Increase X score
+                TextView tvXScore = (TextView) findViewById(R.id.xScore);
+                tvXScore.setText(Integer.toString(game.getXScore()));
                 // Pop up dialog for new game
                 Toast.makeText(getApplicationContext(), "PLAYER X WINS", Toast.LENGTH_LONG).show();
+                resetBoard();
                 break;
             default:
                 // Unfinished state
@@ -115,6 +123,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /* Reset Game object */
-        game = new Game();
+        game.resetGameBoard();
     }
 }
