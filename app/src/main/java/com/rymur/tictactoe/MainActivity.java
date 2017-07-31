@@ -1,9 +1,13 @@
 package com.rymur.tictactoe;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.Toast;
 
 import java.security.InvalidParameterException;
 
@@ -19,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Sets the button to the current player if button has not already been claimed
-     * @param view
+     * @param view - The pressed button
      */
     public void onBtnClick(View view) {
         String curPlayer = game.getCurPlayer();
@@ -76,19 +80,41 @@ public class MainActivity extends AppCompatActivity {
         switch (state) {
             case DRAW:
                 // Pop up a dialog informing user of draw
+                Toast.makeText(getApplicationContext(), "GAME DRAW", Toast.LENGTH_LONG).show();
                 break;
             case O_WON:
                 // Increase O score
                 // Pop up dialog for new game
+                Toast.makeText(getApplicationContext(), "PLAYER O WINS", Toast.LENGTH_LONG).show();
                 break;
             case X_WON:
                 // Increase X score
                 // Pop up dialog for new game
+                Toast.makeText(getApplicationContext(), "PLAYER X WINS", Toast.LENGTH_LONG).show();
                 break;
             default:
                 // Unfinished state
                 // Do nothing and continue game
                 break;
         }
+    }
+
+    /**
+     * Resets all buttons to blank state and creates a new Game object
+     */
+    private void resetBoard() {
+        /* Reset all buttons */
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.activity_main, null);
+        GridLayout board = (GridLayout) findViewById(R.id.grid);
+
+        for (int i = 0; i < board.getChildCount(); i++) {
+            Button btn = (Button) board.getChildAt(i);
+            btn.setText("-");
+            btn.setClickable(true);
+        }
+
+        /* Reset Game object */
+        game = new Game();
     }
 }
