@@ -120,7 +120,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textSize="30sp"
-                android:text="@string/score" />
+                android:text="@string/oScore"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="30sp"
+                android:text="0"
+                android:layout_marginRight="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="30sp"
+                android:text="@string/xScore"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"/>
 
             <TextView
                 android:id="@+id/score"
@@ -128,7 +145,6 @@
                 android:layout_height="match_parent"
                 android:textSize="30sp"
                 android:text="0" />
-
         </LinearLayout>
 
     </LinearLayout>
