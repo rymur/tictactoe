@@ -1,6 +1,6 @@
 package com.rymur.tictactoe;
 
-import static android.view.ViewDebug.HierarchyTraceType.DRAW;
+//import static android.view.ViewDebug.HierarchyTraceType.DRAW;
 import static com.rymur.tictactoe.Game.GameState.DRAW;
 import static com.rymur.tictactoe.Game.GameState.O_WON;
 import static com.rymur.tictactoe.Game.GameState.UNFINISHED;
