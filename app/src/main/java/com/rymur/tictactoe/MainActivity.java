@@ -63,5 +63,32 @@ public class MainActivity extends AppCompatActivity {
             button.setText(curPlayer);
             button.setClickable(false);
         }
+
+        handleGameState();
+    }
+
+    /**
+     * Determines whether the game has ended and updates the UI if it has.
+     */
+    private void handleGameState() {
+        Game.GameState state = game.hasWon();
+
+        switch (state) {
+            case DRAW:
+                // Pop up a dialog informing user of draw
+                break;
+            case O_WON:
+                // Increase O score
+                // Pop up dialog for new game
+                break;
+            case X_WON:
+                // Increase X score
+                // Pop up dialog for new game
+                break;
+            default:
+                // Unfinished state
+                // Do nothing and continue game
+                break;
+        }
     }
 }
