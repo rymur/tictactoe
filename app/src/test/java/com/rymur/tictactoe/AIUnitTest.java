@@ -1,6 +1,7 @@
 package com.rymur.tictactoe;
 
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -9,19 +10,92 @@ import static org.junit.Assert.assertEquals;
 
 public class AIUnitTest {
     @Test
-    public void horizontal_o_wins() {
-        AI ai = new AI();
+    public void AI_selects_center_square_at_start() {
+        AI ai = new AI("O");
+        String[] board = { "-", "-", "-",
+                           "-", "-", "-",
+                           "-", "-", "-" };
+        assertEquals(4, ai.getNextMove(board));
+    }
 
-        String[] row1Win = { "O", "O", "O", "-", "-", "-", "-", "-", "-" };
-        String[] row2Win = { "-", "-", "-", "O", "O", "O", "-", "-", "-" };
-        String[] row3Win = { "-", "-", "-", "-", "-", "-", "O", "O", "O" };
-        String[] randRow1 = { "O", "O", "O", "X", "-", "X", "-", "-", "-" };
-        String[] randRow2 = { "X", "-", "-", "X", "X", "-", "O", "O", "O" };
+    @Test
+    public void AI_selects_obvious_winning_O_hor_move() {
+        AI ai = new AI("O");
+        String[] board = { "-", "-", "-",
+                           "O", "O", "-",
+                           "-", "-", "-" };
+        assertEquals(5, ai.getNextMove(board));
+    }
 
-        String[][] testBoards = { row1Win, row2Win, row3Win, randRow1, randRow2 };
+    @Test
+    public void AI_selects_next_winning_O_hor_move() {
+        AI ai = new AI("O");
+        String[] board = { "O", "O", "-",
+                           "X", "X", "-",
+                           "-", "-", "-" };
+        assertEquals(2, ai.getNextMove(board));
+    }
 
-        for (String[] board : testBoards) {
-            assertEquals(ai.)
-        }
+    @Test
+    public void AI_selects_next_winning_X_hor_move() {
+        AI ai = new AI("X");
+        String[] board = { "O", "O", "-",
+                           "X", "X", "-",
+                           "-", "-", "-" };
+        assertEquals(5, ai.getNextMove(board));
+    }
+
+    @Test
+    public void AI_selects_next_winning_O_col_move() {
+        AI ai = new AI("O");
+        String[] board = { "X", "O", "X",
+                           "-", "O", "X",
+                           "-", "-", "-" };
+        assertEquals(7, ai.getNextMove(board));
+    }
+
+    @Test
+    public void AI_selects_next_winning_X_col_move() {
+        AI ai = new AI("X");
+        String[] board = { "O", "X", "O",
+                           "-", "X", "O",
+                           "-", "-", "-" };
+        assertEquals(7, ai.getNextMove(board));
+    }
+
+    @Test
+    public void AI_O_blocks_X_hor_win() {
+        AI ai = new AI("O");
+        String[] board = { "O", "-", "-",
+                           "X", "X", "-",
+                           "O", "-", "-" };
+        assertEquals(5, ai.getNextMove(board));
+    }
+
+    @Test
+    public void AI_O_selects_right_diag_win() {
+        AI ai = new AI("O");
+        String[] board = { "O", "-", "-",
+                           "X", "O", "X",
+                           "O", "-", "-" };
+        assertEquals(8, ai.getNextMove(board));
+    }
+
+    @Test
+    public void AI_X_selects_left_diag_win() {
+        AI ai = new AI("X");
+        String[] board = { "O", "-", "-",
+                           "O", "X", "O",
+                           "X", "-", "-" };
+        assertEquals(2, ai.getNextMove(board));
+    }
+
+    @Test
+    public void AI_X_selects_move_that_will_win_in_2_moves() {
+        AI ai = new AI("X");
+        String[] board = {  "-", "O", "-",
+                            "O", "X", "-",
+                            "-", "X", "-" };
+        assertEquals(6, ai.getNextMove(board));
     }
 }

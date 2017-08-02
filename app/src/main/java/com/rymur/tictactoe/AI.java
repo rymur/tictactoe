@@ -86,7 +86,7 @@ public class AI {
                     bestScore = Math.max(bestScore, minimax(depth + 1, newChild, !isPlayerO));
                 }
             }
-            return bestScore - 1;
+            return bestScore - depth;
         } else {
             int bestScore = Integer.MAX_VALUE;
             for (int i = 0; i < 9; i++) {
@@ -96,7 +96,7 @@ public class AI {
                     bestScore = Math.min(bestScore, minimax(depth + 1, newChild, !isPlayerO));
                 }
             }
-            return bestScore + 1;
+            return bestScore + depth;
         }
     }
 
