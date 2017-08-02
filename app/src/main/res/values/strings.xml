@@ -5,4 +5,7 @@
     <string name="placeholder">-</string>
     <string name="playerO">O</string>
     <string name="playerX">X</string>
+    <string name="playAI">One Player</string>
+    <string name="playHuman">Two Player</string>
+    <string name="title">Tic Tac Toe</string>
 </resources>
