@@ -1,12 +1,18 @@
 package com.rymur.tictactoe;
 
+import java.util.Arrays;
+
 /**
  * This class handles the AI for the computer opponent in a one player game.
  * Created by Ryan Murray on 8/2/2017.
  */
 
 public class AI {
-    public AI() {}
+    private String aiPlayer;
+
+    public AI(String playerChar) {
+        aiPlayer = playerChar;
+    }
 
     /**
      * Returns the cell number of the move the AI has decided to make.
@@ -14,13 +20,84 @@ public class AI {
      * @return int - The cell number the AI wants to mark.
      */
     public int getNextMove(String[] board) {
-        // TODO
-        return 0;
+        int bestScore;
+        if (aiPlayer.equals("O")) {
+            bestScore = Integer.MIN_VALUE;
+        } else {
+            bestScore = Integer.MAX_VALUE;
+        }
+        int bestMove = -1;
+        int depth = 9;
+
+        /* Adjust depth to match the number of taken cells */
+        for (int i = 0; i < 9; i++) {
+            if (isCellEmpty(board, i)) {
+                depth--;
+            }
+        }
+
+        /* For every empty cell in the board evaluate making a move there */
+        for (int i = 0; i < 9; i++) {
+            if (isCellEmpty(board, i)) {
+                String[] possibleMove = Arrays.copyOf(board, 9);
+                possibleMove[i] = aiPlayer;
+                int possibleMoveScore = minimax(depth + 1, possibleMove, (!aiPlayer.equals("O")));
+                if (aiPlayer.equals("O")) {
+                    if (possibleMoveScore > bestScore) {
+                        bestScore = possibleMoveScore;
+                        bestMove = i;
+                    }
+                } else {
+                    if (possibleMoveScore < bestScore) {
+                        bestScore = possibleMoveScore;
+                        bestMove = i;
+                    }
+                }
+            }
+        }
+
+        return bestMove;
     }
 
-    private int minimax() {
-        // TODO
-        return 0;
+    /**
+     * Implements the minimax algorithm for Tic Tac Toe
+     * @param depth - The number of occupied cells
+     * @param board - The current game board
+     * @param isPlayerO - Indicates whether it is Player O's move or not
+     * @return int - The best score that can be obtained from the board
+     */
+    private int minimax(int depth, String[] board, boolean isPlayerO) {
+        int boardScore = evaluateBoard(board);
+        if (depth == 9 || boardScore == -10 || boardScore == 10) {
+            return boardScore;
+        }
+
+        /* NOTE: bestScore is returned +/- 1 to take into account how long it will take to reach
+           an end state.
+           Higher (+) scores indicate a faster O-win
+           Lower (-) scores indicate a faster X-win
+         */
+        if (isPlayerO) {
+            int bestScore = Integer.MIN_VALUE;
+            for (int i = 0; i < 9; i++) {
+                if (isCellEmpty(board, i)) {
+                    String[] newChild = Arrays.copyOf(board, 9);
+                    newChild[i] = "O";
+                    bestScore = Math.max(bestScore, minimax(depth + 1, newChild, !isPlayerO));
+                }
+            }
+            return bestScore - 1;
+        } else {
+            int bestScore = Integer.MAX_VALUE;
+            for (int i = 0; i < 9; i++) {
+                if (isCellEmpty(board, i)) {
+                    String[] newChild = Arrays.copyOf(board, 9);
+                    newChild[i] = "X";
+                    bestScore = Math.min(bestScore, minimax(depth + 1, newChild, !isPlayerO));
+                }
+            }
+            return bestScore + 1;
+        }
     }
 
     /**
@@ -62,5 +139,15 @@ public class AI {
         }
 
         return 0;
+    }
+
+    /**
+     * Indicates whether a cell is unoccupied or not
+     * @param board - The game board
+     * @param cell - The index of the cell to test
+     * @return bool - True if cell is unoccupied, false otherwise
+     */
+    private boolean isCellEmpty(String[] board, int cell) {
+        return board[cell].equals("-");
     }
 }
