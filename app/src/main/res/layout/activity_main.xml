@@ -14,17 +14,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
             android:text="@string/title"
             android:textSize="45sp"
-            android:layout_marginBottom="60dp"/>
+            android:textStyle="bold|italic" />
 
         <Button
+            android:id="@+id/onePlayerBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/onePlayerBtn"
-            android:text="@string/playAI"
-            android:clickable="false"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:onClick="onePlayerOnClick"
+            android:text="@string/playAI" />
 
         <Button
             android:id="@+id/twoPlayerBtn"

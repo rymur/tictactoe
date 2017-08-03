@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String PLAYER_COUNT = "com.rymur.tictactoe.PLAYER_COUNT";
+    public static final String MODE = "com.rymur.tictactoe.MODE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,12 +15,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Starts a one player game
+     * @param view - The button that was clicked
+     */
+    public void onePlayerOnClick(View view) {
+        Intent intent = new Intent(this, ChooseDifficultyActivity.class);
+        startActivity(intent);
+    }
+
+    /**
      * Starts a two player game
      * @param view - The button that was clicked
      */
     public void twoPlayerOnClick(View view) {
         Intent intent = new Intent(this, PlayGameActivity.class);
-        intent.putExtra(PLAYER_COUNT, 2);
+        intent.putExtra(MODE, "human");
         startActivity(intent);
     }
 }

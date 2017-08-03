@@ -19,9 +19,11 @@ public class Game {
     private String board[] = new String[9];
     private int oScore;
     private int xScore;
+    private AI ai;
 
     public Game() {
         resetGameBoard();
+        ai = new AI("X");  // TODO: Let player choose character
         oScore = 0;
         xScore = 0;
     }
@@ -53,6 +55,14 @@ public class Game {
         } else {
             return false;
         }
+    }
+
+    public int markCellCPU() {
+        int move = ai.getNextMove(board);
+        board[move] = curPlayer;
+        curPlayer = curPlayer.equals("O") ? "X" : "O";
+
+        return move;
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.rymur.tictactoe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -14,12 +15,15 @@ import java.security.InvalidParameterException;
 
 public class PlayGameActivity extends AppCompatActivity {
     Game game;
+    private String mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
         game = new Game();
+        Intent intent = getIntent();
+        mode = intent.getStringExtra("com.rymur.tictactoe.MODE");
     }
 
     /**
@@ -67,9 +71,25 @@ public class PlayGameActivity extends AppCompatActivity {
         if (game.markCell(btnId)) {
             button.setText(curPlayer);
             button.setClickable(false);
+            handleGameState();
         }
 
-        handleGameState();
+        if (mode.equals("hard")) {
+            int cpuChoice = game.markCellCPU();
+            makeCPUMove(cpuChoice);
+            handleGameState();
+        }
+
+    }
+
+    private void makeCPUMove(int cell) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.activity_play_game, null);
+        GridLayout board = (GridLayout) findViewById(R.id.grid);
+        Button btn = (Button) board.getChildAt(cell);
+
+        btn.setText("X"); // TODO: Let player choose character
+        btn.setClickable(false);
     }
 
     /**
