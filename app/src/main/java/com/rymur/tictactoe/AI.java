@@ -1,6 +1,8 @@
 package com.rymur.tictactoe;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * This class handles the AI for the computer opponent in a one player game.
@@ -12,6 +14,23 @@ public class AI {
 
     public AI(String playerChar) {
         aiPlayer = playerChar;
+    }
+
+    /**
+     * Selects an available cell at random.
+     * @param board - The current game board
+     * @return int - The number of the cell to occupy
+     */
+    public int getRandomMove(String[] board) {
+        ArrayList<Integer> emptyCells = new ArrayList<Integer>();
+        for (int i = 0; i < 9; i++) {
+            if (isCellEmpty(board, i)) {
+                emptyCells.add(i);
+            }
+        }
+        Random random = new Random();
+        int randIndex = random.nextInt(emptyCells.size());
+        return emptyCells.get(randIndex);
     }
 
     /**
