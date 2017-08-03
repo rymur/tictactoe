@@ -34,6 +34,43 @@ public class AI {
     }
 
     /**
+     * Evaluates the current board without looking ahead to select the next move.
+     * @param board - The current game board
+     * @return int - The cell to occupy
+     */
+    public int getShortsightedMove(String[] board) {
+        int bestScore;
+        if (aiPlayer.equals("O")) {
+            bestScore = Integer.MIN_VALUE;
+        } else {
+            bestScore = Integer.MAX_VALUE;
+        }
+        int bestMove = -1;
+
+        /* For every empty cell in the board evaluate making a move there */
+        for (int i = 0; i < 9; i++) {
+            if (isCellEmpty(board, i)) {
+                String[] possibleMove = Arrays.copyOf(board, 9);
+                possibleMove[i] = aiPlayer;
+                int possibleMoveScore = evaluateBoard(possibleMove);
+                if (aiPlayer.equals("O")) {
+                    if (possibleMoveScore > bestScore) {
+                        bestScore = possibleMoveScore;
+                        bestMove = i;
+                    }
+                } else {
+                    if (possibleMoveScore < bestScore) {
+                        bestScore = possibleMoveScore;
+                        bestMove = i;
+                    }
+                }
+            }
+        }
+
+        return bestMove;
+    }
+
+    /**
      * Returns the cell number of the move the AI has decided to make.
      * @param board - The current state of the game board.
      * @return int - The cell number the AI wants to mark.
