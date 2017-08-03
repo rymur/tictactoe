@@ -57,7 +57,23 @@ public class Game {
         }
     }
 
-    public int markCellCPU() {
+    /**
+     * Selects an empty cell at random.
+     * @return int - The cell selected by the AI.
+     */
+    public int markCellCPUEasy() {
+        int move = ai.getRandomMove(board);
+        board[move] = curPlayer;
+        curPlayer = curPlayer.equals("O") ? "X" : "O";
+
+        return move;
+    }
+
+    /**
+     * Selects the optimal cell to play next.
+     * @return int - The cell selected by the AI
+     */
+    public int markCellCPUHard() {
         int move = ai.getNextMove(board);
         board[move] = curPlayer;
         curPlayer = curPlayer.equals("O") ? "X" : "O";

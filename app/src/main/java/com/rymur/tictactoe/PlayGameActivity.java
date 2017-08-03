@@ -74,12 +74,21 @@ public class PlayGameActivity extends AppCompatActivity {
             handleGameState();
         }
 
-        if (mode.equals("hard")) {
-            int cpuChoice = game.markCellCPU();
+        if (!mode.equals("human")) {
+            int cpuChoice;
+            switch (mode) {
+                case "easy":
+                    cpuChoice = game.markCellCPUEasy();
+                    break;
+                case "hard":
+                    cpuChoice = game.markCellCPUHard();
+                    break;
+                default:
+                    throw new InvalidParameterException("mode not recognized");
+            }
             makeCPUMove(cpuChoice);
             handleGameState();
         }
-
     }
 
     private void makeCPUMove(int cell) {
