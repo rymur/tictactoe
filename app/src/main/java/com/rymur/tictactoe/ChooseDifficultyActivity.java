@@ -24,6 +24,12 @@ public class ChooseDifficultyActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void medOnClick(View view) {
+        Intent intent = new Intent(this, PlayGameActivity.class);
+        intent.putExtra(MODE, "medium");
+        startActivity(intent);
+    }
+
     public void hardOnClick(View view) {
         Intent intent = new Intent(this, PlayGameActivity.class);
         intent.putExtra(MODE, "hard");

@@ -69,7 +69,17 @@ public class Game {
         return move;
     }
 
+    /**
+     * Selects a move without looking ahead.
+     * @return int - The cell selected by the AI.
+     */
+    public int markCellCPUMed() {
+        int move = ai.getShortsightedMove(board);
+        board[move] = curPlayer;
+        curPlayer = curPlayer.equals("O") ? "X" : "O";
 
+        return move;
+    }
 
     /**
      * Selects the optimal cell to play next.

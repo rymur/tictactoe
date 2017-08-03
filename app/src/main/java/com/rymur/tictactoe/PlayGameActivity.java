@@ -80,6 +80,9 @@ public class PlayGameActivity extends AppCompatActivity {
                 case "easy":
                     cpuChoice = game.markCellCPUEasy();
                     break;
+                case "medium":
+                    cpuChoice = game.markCellCPUMed();
+                    break;
                 case "hard":
                     cpuChoice = game.markCellCPUHard();
                     break;

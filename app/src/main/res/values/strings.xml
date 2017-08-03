@@ -9,5 +9,6 @@
     <string name="playHuman">Two Player</string>
     <string name="title">Tic Tac Toe</string>
     <string name="easy">Easy</string>
+    <string name="med">Medium</string>
     <string name="hard">Impossible</string>
 </resources>
