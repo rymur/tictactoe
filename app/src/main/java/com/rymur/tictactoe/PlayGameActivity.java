@@ -30,12 +30,25 @@ public class PlayGameActivity extends AppCompatActivity {
 
         game = new Game();
         if (savedInstanceState != null) {
+            /* Restore game data */
             game.setCurPlayer(savedInstanceState.getString(CUR_PLAYER));
             game.setOScore(savedInstanceState.getInt(OSCORE));
             game.setXScore(savedInstanceState.getInt(XSCORE));
-            game.setBoard(savedInstanceState.getStringArray(GAME_BOARD));
+            String[] oldBoard = savedInstanceState.getStringArray(GAME_BOARD);
+            game.setBoard(oldBoard);
 
-
+            /* Restore view data */
+            for (int i = 0; i < 9; i++) {
+                if (!oldBoard[i].equals("-")) {
+                    Button btn = getButtonFromIntId(i);
+                    btn.setClickable(false);
+                    btn.setText(oldBoard[i]);
+                }
+            }
+            TextView tvOScore = (TextView) findViewById(R.id.oScore);
+            tvOScore.setText(Integer.toString(savedInstanceState.getInt(OSCORE)));
+            TextView tvXScore = (TextView) findViewById(R.id.xScore);
+            tvXScore.setText(Integer.toString(savedInstanceState.getInt(XSCORE)));
         }
     }
 
@@ -117,11 +130,7 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void makeCPUMove(int cell) {
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.activity_play_game, null);
-        GridLayout board = (GridLayout) findViewById(R.id.grid);
-        Button btn = (Button) board.getChildAt(cell);
-
+        Button btn = getButtonFromIntId(cell);
         btn.setText("X"); // TODO: Let player choose character
         btn.setClickable(false);
     }
@@ -159,6 +168,16 @@ public class PlayGameActivity extends AppCompatActivity {
                 // Do nothing and continue game
                 break;
         }
+    }
+
+    /**
+     *
+     */
+    private Button getButtonFromIntId(int id) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.activity_play_game, null);
+        GridLayout board = (GridLayout) findViewById(R.id.grid);
+        return (Button) board.getChildAt(id);
     }
 
     /**
