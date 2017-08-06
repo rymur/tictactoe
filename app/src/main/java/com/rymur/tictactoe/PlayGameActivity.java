@@ -16,14 +16,36 @@ import java.security.InvalidParameterException;
 public class PlayGameActivity extends AppCompatActivity {
     Game game;
     private String mode;
+    private static final String CUR_PLAYER = "curPlayer";
+    private static final String OSCORE = "oScore";
+    private static final String XSCORE = "xScore";
+    private static final String GAME_BOARD = "gameBoard";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
-        game = new Game();
         Intent intent = getIntent();
         mode = intent.getStringExtra("com.rymur.tictactoe.MODE");
+
+        game = new Game();
+        if (savedInstanceState != null) {
+            game.setCurPlayer(savedInstanceState.getString(CUR_PLAYER));
+            game.setOScore(savedInstanceState.getInt(OSCORE));
+            game.setXScore(savedInstanceState.getInt(XSCORE));
+            game.setBoard(savedInstanceState.getStringArray(GAME_BOARD));
+
+
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString(CUR_PLAYER, game.getCurPlayer());
+        savedInstanceState.putInt(OSCORE, game.getOScore());
+        savedInstanceState.putInt(XSCORE, game.getXScore());
+        savedInstanceState.putStringArray(GAME_BOARD, game.getBoard());
     }
 
     /**
