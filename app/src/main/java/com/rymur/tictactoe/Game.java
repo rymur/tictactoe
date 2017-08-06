@@ -38,9 +38,21 @@ public class Game {
         return curPlayer;
     }
 
+    public void setCurPlayer(String player) { curPlayer = player; }
+
     public int getOScore() { return oScore; }
 
+    public void setOScore(int score) { oScore = score; }
+
     public int getXScore() { return xScore; }
+
+    public void setXScore(int score) { xScore = score; }
+
+    public String[] getBoard() { return board; }
+
+    public void setBoard(String[] array) { board = array.clone(); }
+
+
 
     /**
      * Attempts to mark the specified cell for the current player.
