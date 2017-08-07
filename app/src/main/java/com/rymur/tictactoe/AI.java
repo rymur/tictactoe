@@ -46,13 +46,25 @@ public class AI {
             bestScore = Integer.MAX_VALUE;
         }
         int bestMove = -1;
+        int depth = 9;
+
+        /* Adjust depth to match the number of taken cells */
+        for (int i = 0; i < 9; i++) {
+            if (isCellEmpty(board, i)) {
+                depth--;
+            }
+        }
+        if (depth < 7) {
+            depth = 7;
+        }
+
 
         /* For every empty cell in the board evaluate making a move there */
         for (int i = 0; i < 9; i++) {
             if (isCellEmpty(board, i)) {
                 String[] possibleMove = Arrays.copyOf(board, 9);
                 possibleMove[i] = aiPlayer;
-                int possibleMoveScore = evaluateBoard(possibleMove);
+                int possibleMoveScore = minimax(depth + 1, possibleMove, (!aiPlayer.equals("O")));
                 if (aiPlayer.equals("O")) {
                     if (possibleMoveScore > bestScore) {
                         bestScore = possibleMoveScore;
