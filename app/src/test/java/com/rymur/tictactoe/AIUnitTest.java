@@ -100,4 +100,95 @@ public class AIUnitTest {
                             "-", "X", "-" };
         assertEquals(6, ai.getNextMove(board));
     }
+
+    /* Shortsighted AI Tests */
+    @Test
+    public void SS_AI_selects_obvious_winning_O_hor_move() {
+        AI ai = new AI("O");
+        String[] board = { "-", "-", "-",
+                           "O", "O", "-",
+                           "-", "-", "-" };
+        assertEquals(5, ai.getShortsightedMove(board));
+    }
+
+    @Test
+    public void SS_AI_selects_next_winning_O_hor_move() {
+        AI ai = new AI("O");
+        String[] board = { "O", "O", "-",
+                           "X", "X", "-",
+                           "-", "-", "-" };
+        assertEquals(2, ai.getShortsightedMove(board));
+    }
+
+    @Test
+    public void SS_AI_selects_next_winning_X_hor_move() {
+        AI ai = new AI("X");
+        String[] board = { "O", "O", "-",
+                           "X", "X", "-",
+                           "-", "-", "-" };
+        assertEquals(5, ai.getShortsightedMove(board));
+    }
+
+    @Test
+    public void SS_AI_selects_next_winning_O_col_move() {
+        AI ai = new AI("O");
+        String[] board = { "X", "O", "X",
+                           "-", "O", "X",
+                           "-", "-", "-" };
+        assertEquals(7, ai.getShortsightedMove(board));
+    }
+
+    @Test
+    public void SS_AI_selects_next_winning_X_col_move() {
+        AI ai = new AI("X");
+        String[] board = { "O", "X", "O",
+                           "-", "X", "O",
+                           "-", "-", "-" };
+        assertEquals(7, ai.getShortsightedMove(board));
+    }
+
+    @Test
+    public void SS_AI_O_blocks_X_hor_win() {
+        AI ai = new AI("O");
+        String[] board = { "O", "-", "-",
+                           "X", "X", "-",
+                           "O", "-", "-" };
+        assertEquals(5, ai.getShortsightedMove(board));
+    }
+
+    @Test
+    public void SS_AI_O_selects_right_diag_win() {
+        AI ai = new AI("O");
+        String[] board = { "O", "-", "-",
+                           "X", "O", "X",
+                           "O", "-", "-" };
+        assertEquals(2, ai.getShortsightedMove(board));
+    }
+
+    @Test
+    public void SS_AI_X_selects_left_diag_win() {
+        AI ai = new AI("X");
+        String[] board = { "X", "-", "-",
+                           "O", "X", "O",
+                           "O", "-", "-" };
+        assertEquals(8, ai.getShortsightedMove(board));
+    }
+
+    @Test
+    public void SS_AI_X_does_not_select_move_that_will_win_in_2_moves() {
+        AI ai = new AI("X");
+        String[] board = {  "-", "O", "-",
+                            "O", "X", "-",
+                            "-", "X", "-" };
+        assertEquals(0, ai.getShortsightedMove(board));
+    }
+
+    @Test
+    public void SS_AI_fails_to_block_setup_move() {
+        AI ai = new AI("X");
+        String[] board = {  "-", "-", "O",
+                            "-", "-", "-",
+                            "O", "-", "X" };
+        assertEquals(4, ai.getShortsightedMove(board));
+    }
 }
